@@ -1,9 +1,7 @@
 ﻿using FLAC_Downloader_CLI.Spotify;
-using FLAC_Downloader_CLI.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
