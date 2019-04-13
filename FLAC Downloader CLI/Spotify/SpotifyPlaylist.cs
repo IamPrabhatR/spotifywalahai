@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FLAC_Downloader_CLI.Spotify
 {
-    class PlaylistJson
+    class SpotifyPlaylist
     {
         public class Rootobject
         {

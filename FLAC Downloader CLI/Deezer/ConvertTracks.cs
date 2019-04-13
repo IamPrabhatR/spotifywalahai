@@ -17,7 +17,7 @@ namespace FLAC_Downloader_CLI.Deezer
         private static List<DeezerTrack> DeezerTracks = new List<DeezerTrack>();
         private static List<SpotifyTrack> SpotifyTracks = new List<SpotifyTrack>();
         private static string jsonRaw = File.ReadAllText("playlist.json");
-        private static PlaylistJson.Rootobject SpotifyTracksFromJson = JsonConvert.DeserializeObject<PlaylistJson.Rootobject>(jsonRaw);
+        private static SpotifyPlaylist.Rootobject SpotifyTracksFromJson = JsonConvert.DeserializeObject<SpotifyPlaylist.Rootobject>(jsonRaw);
         private static int totalTracks = SpotifyTracksFromJson.tracks.items.Count();
         private static int totalTracksChecked = 0;
         private static int totalTracksFound = 0;

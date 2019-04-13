@@ -68,11 +68,10 @@
     <Compile Include="Spotify\ParsePlaylistUrl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spotify\PlaylistJson.cs" />
+    <Compile Include="Spotify\SpotifyPlaylist.cs" />
     <Compile Include="Spotify\SpotifyPlaylistDownload.cs" />
     <Compile Include="Spotify\SpotifyToken.cs" />
     <Compile Include="Spotify\SpotifyTrack.cs" />
-    <Compile Include="Spotify\SpotifyTracks.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
