@@ -5,3 +5,4 @@
 
 # Current Capabilities
 * Takes spotify playlist, uses API, parses and then outputs a json file of Deezer song IDs to be downloaded.
+* Downloads Deezer tracks through https://free-mp3-download.net/. Yes this is a shitty solution while I reverse engineer Deezer's CDN.
