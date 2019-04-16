@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Deezer\ConvertTracks.cs" />
     <Compile Include="Deezer\DeezerTrack.cs" />
+    <Compile Include="Deezer\DownloadDeezerTracks.cs" />
     <Compile Include="Spotify\ParsePlaylistUrl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

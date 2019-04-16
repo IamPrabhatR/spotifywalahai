@@ -1,33 +1,31 @@
-﻿using FLAC_Downloader_CLI.Spotify;
+﻿using E.Deezer;
+using E.Deezer.Api;
+using FLAC_Downloader_CLI.Spotify;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
-using E.Deezer.Api;
-using E.Deezer;
 
 namespace FLAC_Downloader_CLI.Deezer
 {
     class ConvertTracks
     {
-        private static List<DeezerTrack> DeezerTracks = new List<DeezerTrack>();
-        private static List<SpotifyTrack> SpotifyTracks = new List<SpotifyTrack>();
-        private static string jsonRaw = File.ReadAllText("playlist.json");
-        private static SpotifyPlaylist.Rootobject SpotifyTracksFromJson = JsonConvert.DeserializeObject<SpotifyPlaylist.Rootobject>(jsonRaw);
-        private static int totalTracks = SpotifyTracksFromJson.tracks.items.Count();
+        private static readonly string jsonRaw = File.ReadAllText("spotifyplaylist.json");
+        private static readonly List<DeezerTrack> DeezerTracks = new List<DeezerTrack>();
+        private static readonly SpotifyPlaylist.Rootobject SpotifyTracks = JsonConvert.DeserializeObject<SpotifyPlaylist.Rootobject>(jsonRaw);
+        private static readonly int totalTracks = SpotifyTracks.tracks.items.Count();
         private static int totalTracksChecked = 0;
         private static int totalTracksFound = 0;
 
         public static async Task GetTracks()
         {
             var deezer = DeezerSession.CreateNew();
-            for (int i = 0; i < SpotifyTracksFromJson.tracks.items.Count(); i++)
+            for (int i = 0; i < SpotifyTracks.tracks.items.Count(); i++)
             {
-                IEnumerable<ITrack> tracks = await deezer.Search.Tracks(SpotifyTracksFromJson.tracks.items[i].track.name, 0, 100);
+                IEnumerable<ITrack> tracks = await deezer.Search.Tracks(SpotifyTracks.tracks.items[i].track.name, 0, 100);
                 IEnumerable<ITrack> tracks1 = tracks;
-                tracks = null;
                 ITrack track = FindCorrectTrack(tracks1, i);
                 if (track != null)
                 {
@@ -44,7 +42,7 @@ namespace FLAC_Downloader_CLI.Deezer
                     //Console.WriteLine("TRACK NOT FOUND ON DEEZER");
                 }
             }
-            File.WriteAllText("output.json", JsonConvert.SerializeObject(DeezerTracks));
+            File.WriteAllText("deezertracks.json", JsonConvert.SerializeObject(DeezerTracks));
             Console.WriteLine(DeezerTracks.Count);
             Console.WriteLine("Conversion to Deezer json file complete. {0} tracks found on Deezer out of {1} tracks.", totalTracksFound, totalTracks);
         }
@@ -65,7 +63,7 @@ namespace FLAC_Downloader_CLI.Deezer
             ITrack track;
             foreach (ITrack DeezerTrack in tracks)
             {
-                if ((DeezerTrack.Title != SpotifyTracksFromJson.tracks.items[index].track.name ? false : DeezerTrack.ArtistName == SpotifyTracksFromJson.tracks.items[index].track.album.artists[0].name))
+                if ((DeezerTrack.Title != SpotifyTracks.tracks.items[index].track.name ? false : DeezerTrack.ArtistName == SpotifyTracks.tracks.items[index].track.album.artists[0].name))
                 {
                     track = DeezerTrack;
                     return track;

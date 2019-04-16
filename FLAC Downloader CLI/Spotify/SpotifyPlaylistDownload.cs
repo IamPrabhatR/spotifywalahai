@@ -12,7 +12,19 @@ namespace FLAC_Downloader_CLI
 {
     class SpotifyPlaylistDownload
     {
-        public static async Task<string> GetAccessToken()
+        public static async Task Manager(string userId, string playlistId)
+        {
+            string accessToken = await GetAccessToken();
+            string str = accessToken;
+            accessToken = null;
+            Console.WriteLine("Downloading playlist file");
+            string playList = await GetPlayList(str, userId, playlistId);
+            string str1 = playList;
+            File.WriteAllText("spotifyplaylist.json", str1);
+            Console.WriteLine("spotifyplaylist.json created");
+        }
+
+        private static async Task<string> GetAccessToken()
         {
             SpotifyToken token = new SpotifyToken();
             string postString = string.Format("grant_type=client_credentials");
