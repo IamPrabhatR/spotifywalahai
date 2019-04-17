@@ -19,7 +19,7 @@ namespace FLAC_Downloader_CLI.Deezer
             System.IO.Directory.CreateDirectory("Output");
             foreach (DeezerTrack track in DeezerTracks)
             {
-                GetRequest("https://free-mp3-download.net/dl.php?i=" + track.TrackId + "&c=37160&f=flac", "Output/" + track.TrackName + " - " + string.Join("_", track.ArtistName.Split(Path.GetInvalidFileNameChars())) + ".flac").Wait();
+                GetRequest("https://free-mp3-download.net/dl.php?i=" + track.TrackId + "&c=CAPTCHA&f=flac", "Output/" + track.TrackName + " - " + string.Join("_", track.ArtistName.Split(Path.GetInvalidFileNameChars())) + ".flac").Wait();
                 Console.WriteLine("Output/" + track.TrackName + " - " + string.Join("_", track.ArtistName.Split(Path.GetInvalidFileNameChars()))  + ".flac");
             }
         }
